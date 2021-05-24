@@ -14,10 +14,14 @@ class CountdownTimer {
     this.countDown();
   }
 
+  makeString(value) {
+    return String(value).padStart(2, '0');
+  }
+  
   countDown() {
     setInterval(() => {
-      const curentTime = new Date();
-      const timerTime = this.targetDate - curentTime;
+      const currentTime = new Date();
+      const timerTime = this.targetDate - currentTime;
       const time = this.getTimeComponents(timerTime);
       this.onTick(time);
     }, 1000);
@@ -33,16 +37,7 @@ class CountdownTimer {
 
     return { days, hours, mins, secs };
   }
-  makeString(value) {
-    return String(value).padStart(2, '0');
-  }
 }
-
-new CountdownTimer({
-  selector: '#timer-1',
-  targetDate: new Date(2022, 0, 1, 0, 0, 0),
-  onTick: updateTimer,
-});
 
 function updateTimer({ days, hours, mins, secs }) {
   refs.days.textContent = days;
@@ -50,3 +45,9 @@ function updateTimer({ days, hours, mins, secs }) {
   refs.mins.textContent = mins;
   refs.secs.textContent = secs;
 }
+
+new CountdownTimer({
+  selector: '#timer-1',
+  targetDate: new Date(2022, 0, 1, 0, 0, 0),
+  onTick: updateTimer,
+});
