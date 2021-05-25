@@ -1,15 +1,13 @@
-const refs = {
-  days: document.querySelector('[data-value=days]'),
-  hours: document.querySelector('[data-value=hours]'),
-  mins: document.querySelector('[data-value=mins]'),
-  secs: document.querySelector('[data-value=secs]'),
-};
+import './sass/main.scss';
 
 class CountdownTimer {
-  constructor({ selector, targetDate, onTick }) {
-    this.selector = selector;
+  constructor({ selector, targetDate }) {
+    document.querySelector('.timer').id = selector;
     this.targetDate = targetDate;
-    this.onTick = onTick;
+    this.days = document.querySelector('[data-value=days]'),
+    this.hours = document.querySelector('[data-value=hours]'),
+    this.mins = document.querySelector('[data-value=mins]'),
+    this.secs = document.querySelector('[data-value=secs]'),
 
     this.countDown();
   }
@@ -23,7 +21,7 @@ class CountdownTimer {
       const currentTime = new Date();
       const timerTime = this.targetDate - currentTime;
       const time = this.getTimeComponents(timerTime);
-      this.onTick(time);
+      this.updateTimer(time);
     }, 1000);
   }
 
@@ -37,17 +35,16 @@ class CountdownTimer {
 
     return { days, hours, mins, secs };
   }
-}
-
-function updateTimer({ days, hours, mins, secs }) {
-  refs.days.textContent = days;
-  refs.hours.textContent = hours;
-  refs.mins.textContent = mins;
-  refs.secs.textContent = secs;
+  
+  updateTimer({ days, hours, mins, secs }) {
+    this.days.textContent = days;
+    this.hours.textContent = hours;
+    this.mins.textContent = mins;
+    this.secs.textContent = secs;
+  }
 }
 
 new CountdownTimer({
   selector: '#timer-1',
   targetDate: new Date(2022, 0, 1, 0, 0, 0),
-  onTick: updateTimer,
 });
