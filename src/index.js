@@ -2,12 +2,12 @@ import './sass/main.scss';
 
 class CountdownTimer {
   constructor({ selector, targetDate }) {
-    document.querySelector('.timer').id = selector;
-    this.targetDate = targetDate;
-    this.days = document.querySelector('[data-value=days]'),
-    this.hours = document.querySelector('[data-value=hours]'),
-    this.mins = document.querySelector('[data-value=mins]'),
-    this.secs = document.querySelector('[data-value=secs]'),
+    this.selector = document.querySelector(`${selector}`),
+    this.targetDate = targetDate,
+    this.days = document.querySelector(`${selector} [data-value=days]`),
+    this.hours = document.querySelector(`${selector} [data-value=hours]`),
+    this.mins = document.querySelector(`${selector} [data-value=mins]`),
+    this.secs = document.querySelector(`${selector} [data-value=secs]`),
 
     this.countDown();
   }
